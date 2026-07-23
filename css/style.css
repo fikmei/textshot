@@ -1,5 +1,4 @@
-/* TextShot 공통 스타일과 모바일 우선 반응형 스타일을 작성할 파일 */
-
+/* TextShot에서 반복해서 사용하는 색상, 모서리, 여백 값 */
 :root {
   --color-background: #ffffff;
   --color-surface: #f5f5f5;
@@ -7,16 +6,232 @@
   --color-text: #1a1a1a;
   --color-text-secondary: #6b6b6b;
   --color-border: #e5e5e5;
+  --radius-medium: 12px;
+  --page-padding: 20px;
 }
 
-* {
+/* 모든 요소의 크기 계산 방식을 동일하게 설정 */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+/* 페이지 전체에 적용되는 기본 화면과 글자 설정 */
+html {
+  background: var(--color-background);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
   background: var(--color-background);
   color: var(--color-text);
   font-family: Arial, "Noto Sans KR", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 앱 전체 영역과 고정 하단 메뉴를 위한 공간 */
+.app-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  background: var(--color-background);
+}
+
+/* 서비스 이름이 표시되는 상단 헤더 */
+.app-header {
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.app-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 18px var(--page-padding);
+}
+
+.app-logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* 홈 화면의 본문 크기와 바깥 여백 */
+.main-content {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px var(--page-padding) 32px;
+}
+
+.home {
+  width: 100%;
+}
+
+/* 홈 화면의 작은 문구, 제목, 설명 글 */
+.home__eyebrow {
+  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.home__title {
+  font-size: clamp(28px, 8vw, 36px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.home__description {
+  margin-top: 16px;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+/* 사진 촬영과 사진 선택 버튼을 담는 카드 */
+.capture-panel {
+  margin-top: 32px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+}
+
+.capture-panel__title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.capture-panel__description {
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.capture-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* 촬영 버튼과 선택 버튼의 공통 및 개별 디자인 */
+.button {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: var(--radius-medium);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition:
+    transform 120ms ease,
+    opacity 120ms ease;
+}
+
+.button--primary {
+  background: var(--color-primary);
+  color: var(--color-background);
+}
+
+.button--secondary {
+  border: 1px solid #cfcfcf;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:focus-visible,
+.bottom-nav__item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* 이번 달에 남은 무료 추출 횟수 안내 */
+.usage-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-background);
+  gap: 16px;
+}
+
+.usage-card__label {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.usage-card__count {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.usage-note {
+  margin-top: 10px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* 화면 아래에 고정되는 홈과 보관함 메뉴 */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--color-border);
+  background: var(--color-background);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bottom-nav__item {
+  min-height: 64px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.bottom-nav__item--active {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+/* 움직임 줄이기를 켠 사용자는 버튼 효과를 거의 없도록 설정 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
