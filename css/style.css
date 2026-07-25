@@ -17,6 +17,19 @@
   box-sizing: border-box;
 }
 
+/* 화면에는 숨기지만 화면 읽기 프로그램에는 필요한 설명 글 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* 페이지 전체에 적용되는 기본 화면과 글자 설정 */
 html {
   background: var(--color-background);
@@ -400,6 +413,13 @@ button {
   gap: 12px;
 }
 
+.result-card__information {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
 .result-card__mark-type,
 .result-card__number {
   color: var(--color-text-secondary);
@@ -420,6 +440,92 @@ button {
   line-height: 1.7;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
+}
+
+/* 결과 카드에서 사용하는 복사·수정·취소·완료 버튼 */
+.result-card__action {
+  min-height: 40px;
+  padding: 9px 13px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.result-card__action--primary {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-background);
+}
+
+.result-card__action:active {
+  transform: scale(0.98);
+}
+
+.result-card__action:focus-visible,
+.result-card__textarea:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.result-card__copy {
+  flex: 0 0 auto;
+  min-width: 64px;
+}
+
+.result-card__footer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* 수정 버튼을 눌렀을 때 카드 안에 나타나는 문장 편집 영역 */
+.result-card__edit-form {
+  margin-top: 16px;
+}
+
+.result-card__textarea {
+  display: block;
+  width: 100%;
+  min-height: 132px;
+  padding: 14px;
+  resize: vertical;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.result-card__edit-error {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.result-card__edit-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* 오래된 브라우저에서 복사할 때만 잠깐 사용하는 보이지 않는 입력창 */
+.temporary-copy-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* 추출된 문장이 하나도 없을 때 보여주는 안내 카드 */
@@ -664,6 +770,41 @@ button {
   .result-card__text {
     margin-top: 13px;
     font-size: 15px;
+  }
+
+  .result-card__action {
+    min-height: 36px;
+    padding: 8px 11px;
+    font-size: 11px;
+  }
+
+  .result-card__copy {
+    min-width: 55px;
+  }
+
+  .result-card__footer {
+    margin-top: 15px;
+    padding-top: 12px;
+  }
+
+  .result-card__edit-form {
+    margin-top: 13px;
+  }
+
+  .result-card__textarea {
+    min-height: 116px;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .result-card__edit-error {
+    margin-top: 7px;
+    font-size: 10px;
+  }
+
+  .result-card__edit-actions {
+    gap: 8px;
+    margin-top: 10px;
   }
 
   .empty-result {
