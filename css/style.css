@@ -40,6 +40,10 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 /* 앱 전체 영역과 고정 하단 메뉴를 위한 공간 */
 .app-shell {
   min-height: 100vh;
@@ -98,6 +102,10 @@ button {
   overflow-wrap: anywhere;
 }
 
+.home__title:focus {
+  outline: none;
+}
+
 .home__description {
   margin-top: 16px;
   color: var(--color-text-secondary);
@@ -133,6 +141,24 @@ button {
   margin-top: 20px;
 }
 
+/* 실제 파일 입력은 숨기고 사용자가 보기 편한 버튼으로 대신 실행 */
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.image-error {
+  margin-top: 12px;
+  color: var(--color-text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 /* 촬영 버튼과 선택 버튼의 공통 및 개별 디자인 */
 .button {
   width: 100%;
@@ -165,6 +191,12 @@ button {
 
 .button:active {
   transform: scale(0.98);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
 }
 
 .button:focus-visible,
@@ -204,6 +236,224 @@ button {
   line-height: 1.5;
 }
 
+/* 선택한 사진과 회전·다시 시도·완료 버튼을 보여주는 화면 */
+.preview-screen {
+  width: 100%;
+}
+
+.preview-screen__eyebrow {
+  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.preview-screen__title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.preview-screen__title:focus {
+  outline: none;
+}
+
+.preview-screen__description {
+  margin-top: 10px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.preview-frame {
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  margin-top: 24px;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+}
+
+.preview-canvas {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 52vh;
+  border-radius: 8px;
+  background: var(--color-background);
+}
+
+.preview-file-name,
+.rotation-status {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.preview-file-name {
+  margin-top: 10px;
+}
+
+.preview-tools {
+  margin-top: 18px;
+}
+
+.rotation-status {
+  margin-top: 8px;
+  text-align: center;
+}
+
+.preview-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* 가짜 분석 진행 상태와 추출 결과 화면 */
+.extraction-screen {
+  width: 100%;
+}
+
+.analysis-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+}
+
+.analysis-status__spinner {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+  border: 3px solid #d4d4d4;
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.analysis-status__eyebrow,
+.extraction-result__eyebrow {
+  margin-bottom: 8px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.analysis-status__title,
+.extraction-result__title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.extraction-result__title:focus {
+  outline: none;
+}
+
+.analysis-status__description,
+.extraction-result__description {
+  margin-top: 10px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.result-count {
+  margin-top: 24px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.result-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* 추출 문장 한 개를 보여주는 카드 */
+.result-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-background);
+}
+
+.result-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.result-card__mark-type,
+.result-card__number {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+.result-card__mark-type {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-weight: 700;
+}
+
+.result-card__text {
+  margin-top: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+/* 추출된 문장이 하나도 없을 때 보여주는 안내 카드 */
+.empty-result {
+  margin-top: 12px;
+  padding: 24px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.empty-result__title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.empty-result__description {
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.extraction-result__restart {
+  margin-top: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* 화면 아래에 고정되는 홈과 보관함 메뉴 */
 .bottom-nav {
   position: fixed;
@@ -235,7 +485,7 @@ button {
 /* 768px 이상 PC 화면에서는 메뉴와 콘텐츠를 넓은 화면에 맞게 재배치 */
 @media (min-width: 768px) {
   :root {
-    --page-padding: 32px;
+    --page-padding: 21px;
   }
 
   .app-shell {
@@ -243,80 +493,196 @@ button {
   }
 
   .app-header__inner {
-    max-width: 960px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    max-width: 617px;
+    padding-top: 13px;
+    padding-bottom: 13px;
   }
 
   .app-logo {
-    font-size: 36px;
+    font-size: 23px;
   }
 
   .main-content {
-    max-width: 832px;
-    padding-top: 94px;
-    padding-bottom: 84px;
+    max-width: 533px;
+    padding-top: 60px;
+    padding-bottom: 54px;
   }
 
   .home__eyebrow {
-    margin-bottom: 13px;
-    font-size: 17px;
+    margin-bottom: 8px;
+    font-size: 11px;
   }
 
   .home__title {
-    font-size: 52px;
+    font-size: 33px;
   }
 
   .home__description {
-    margin-top: 21px;
-    font-size: 20px;
+    margin-top: 13px;
+    font-size: 13px;
   }
 
   .capture-panel {
-    margin-top: 42px;
-    padding: 29px;
-    border-radius: 16px;
+    margin-top: 27px;
+    padding: 18px;
+    border-radius: 10px;
   }
 
   .capture-panel__title {
-    font-size: 22px;
+    font-size: 14px;
   }
 
   .capture-panel__description {
-    margin-top: 10px;
-    font-size: 17px;
+    margin-top: 7px;
+    font-size: 11px;
   }
 
   .capture-actions {
-    gap: 16px;
-    margin-top: 26px;
+    gap: 10px;
+    margin-top: 17px;
   }
 
   .button {
-    min-height: 68px;
-    padding: 18px 23px;
-    border-radius: 16px;
-    font-size: 21px;
+    min-height: 43px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 13px;
   }
 
   .usage-card {
-    margin-top: 26px;
-    padding: 21px;
-    border-radius: 16px;
-    gap: 21px;
+    margin-top: 17px;
+    padding: 13px;
+    border-radius: 10px;
+    gap: 13px;
   }
 
   .usage-card__label {
-    font-size: 17px;
+    font-size: 11px;
   }
 
   .usage-card__count {
-    font-size: 18px;
+    font-size: 12px;
   }
 
   .usage-note {
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+  .image-error {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  .preview-screen__eyebrow {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .preview-screen__title {
+    font-size: 26px;
+  }
+
+  .preview-screen__description {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .preview-frame {
+    min-height: 269px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .preview-file-name,
+  .rotation-status {
+    font-size: 10px;
+  }
+
+  .preview-file-name {
+    margin-top: 8px;
+  }
+
+  .preview-tools,
+  .preview-actions {
+    margin-top: 15px;
+  }
+
+  .preview-actions {
+    gap: 10px;
+  }
+
+  .analysis-status {
+    gap: 13px;
+    padding: 18px;
+    border-radius: 10px;
+  }
+
+  .analysis-status__spinner {
+    width: 20px;
+    height: 20px;
+  }
+
+  .analysis-status__eyebrow,
+  .extraction-result__eyebrow {
+    margin-bottom: 7px;
+    font-size: 11px;
+  }
+
+  .analysis-status__title,
+  .extraction-result__title {
+    font-size: 24px;
+  }
+
+  .analysis-status__description,
+  .extraction-result__description {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .result-count {
+    margin-top: 20px;
+    font-size: 11px;
+  }
+
+  .result-list {
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .result-card {
+    padding: 17px;
+    border-radius: 10px;
+  }
+
+  .result-card__mark-type,
+  .result-card__number {
+    font-size: 10px;
+  }
+
+  .result-card__text {
     margin-top: 13px;
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .empty-result {
+    margin-top: 10px;
+    padding: 20px 17px;
+    border-radius: 10px;
+  }
+
+  .empty-result__title {
+    font-size: 14px;
+  }
+
+  .empty-result__description {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+
+  .extraction-result__restart {
+    margin-top: 17px;
   }
 
   .button--camera,
@@ -337,11 +703,11 @@ button {
   }
 
   .bottom-nav__item {
-    min-width: 72px;
-    min-height: 44px;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-size: 20px;
+    min-width: 47px;
+    min-height: 30px;
+    padding: 7px 12px;
+    border-radius: 5px;
+    font-size: 13px;
   }
 
   .bottom-nav__item--active {
@@ -354,5 +720,9 @@ button {
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .analysis-status__spinner {
+    animation: none;
   }
 }

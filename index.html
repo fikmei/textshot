@@ -35,11 +35,11 @@
       </header>
 
       <main id="main-content" class="main-content">
-        <section class="home" aria-labelledby="home-title">
+        <section id="home-screen" class="home" aria-labelledby="home-title">
           <!-- 서비스의 목적을 알려주는 홈 소개 영역 -->
           <div class="home__intro">
             <p class="home__eyebrow">나만의 문장 보관함</p>
-            <h2 id="home-title" class="home__title">
+            <h2 id="home-title" class="home__title" tabindex="-1">
               책 속에 표시한 문장을<br />간직하세요
             </h2>
             <p class="home__description">
@@ -78,6 +78,23 @@
                 </span>
               </button>
             </div>
+
+            <!-- 버튼이 대신 열어주는 모바일 카메라와 사진 파일 선택 도구 -->
+            <input
+              id="camera-input"
+              class="file-input"
+              type="file"
+              accept="image/*"
+              capture="environment"
+            />
+            <input
+              id="gallery-input"
+              class="file-input"
+              type="file"
+              accept="image/*"
+            />
+
+            <p id="image-error" class="image-error" role="alert" hidden></p>
           </section>
 
           <!-- 이번 달에 남은 무료 추출 횟수 안내 -->
@@ -89,6 +106,120 @@
           <p class="usage-note">
             문장이 정상적으로 추출된 경우에만 1회 차감됩니다.
           </p>
+        </section>
+
+        <!-- 사진을 선택한 뒤 회전하거나 다시 고를 수 있는 미리보기 화면 -->
+        <section
+          id="preview-screen"
+          class="preview-screen"
+          aria-labelledby="preview-title"
+          hidden
+        >
+          <div class="preview-screen__header">
+            <p class="preview-screen__eyebrow">전송 전 확인</p>
+            <h2 id="preview-title" class="preview-screen__title" tabindex="-1">
+              사진을 확인해 주세요
+            </h2>
+            <p class="preview-screen__description">
+              글자와 표시한 부분이 선명하게 보이는지 확인해 주세요.
+            </p>
+          </div>
+
+          <div class="preview-frame">
+            <canvas
+              id="preview-canvas"
+              class="preview-canvas"
+              role="img"
+              aria-label="선택한 책 사진 미리보기"
+            ></canvas>
+          </div>
+
+          <p id="preview-file-name" class="preview-file-name"></p>
+
+          <div class="preview-tools">
+            <button
+              id="rotate-button"
+              class="button button--secondary"
+              type="button"
+            >
+              오른쪽으로 90° 회전
+            </button>
+            <p id="rotation-status" class="rotation-status" aria-live="polite">
+              원래 방향
+            </p>
+          </div>
+
+          <div class="preview-actions">
+            <button
+              id="retry-button"
+              class="button button--secondary"
+              type="button"
+            >
+              다시 시도
+            </button>
+            <button
+              id="complete-button"
+              class="button button--primary"
+              type="button"
+            >
+              완료
+            </button>
+          </div>
+        </section>
+
+        <!-- 완료 버튼을 누른 뒤 가짜 분석 상태와 추출 문장을 보여주는 화면 -->
+        <section
+          id="extraction-screen"
+          class="extraction-screen"
+          aria-labelledby="extraction-title"
+          hidden
+        >
+          <div id="analysis-status" class="analysis-status" role="status">
+            <span class="analysis-status__spinner" aria-hidden="true"></span>
+            <div>
+              <p class="analysis-status__eyebrow">사진 확인 중</p>
+              <h2 id="extraction-title" class="analysis-status__title">
+                표시한 문장을 찾고 있어요
+              </h2>
+              <p class="analysis-status__description">
+                지금은 실제 API 대신 미리 준비한 문장으로 연습합니다.
+              </p>
+            </div>
+          </div>
+
+          <div id="extraction-result" class="extraction-result" hidden>
+            <div class="extraction-result__header">
+              <p class="extraction-result__eyebrow">추출 결과</p>
+              <h2
+                id="result-title"
+                class="extraction-result__title"
+                tabindex="-1"
+              >
+                표시한 문장을 찾았어요
+              </h2>
+              <p id="result-description" class="extraction-result__description">
+                지금은 화면을 테스트하기 위한 가짜 문장입니다.
+              </p>
+            </div>
+
+            <p id="result-count" class="result-count" aria-live="polite"></p>
+            <div id="result-list" class="result-list"></div>
+
+            <div id="empty-result" class="empty-result" hidden>
+              <h3 class="empty-result__title">표시한 문장을 찾지 못했어요</h3>
+              <p class="empty-result__description">
+                표시한 부분과 글자가 선명하게 보이도록 다시 촬영해 주세요.
+              </p>
+            </div>
+
+            <button
+              id="new-image-button"
+              class="button button--secondary extraction-result__restart"
+              type="button"
+            >
+              다른 사진 선택하기
+            </button>
+          </div>
         </section>
       </main>
 
