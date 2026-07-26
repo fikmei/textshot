@@ -413,24 +413,9 @@ button {
   gap: 12px;
 }
 
-.result-card__information {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.result-card__mark-type,
 .result-card__number {
   color: var(--color-text-secondary);
   font-size: 12px;
-}
-
-.result-card__mark-type {
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: var(--color-surface);
-  font-weight: 700;
 }
 
 .result-card__text {
@@ -517,6 +502,63 @@ button {
   margin-top: 12px;
 }
 
+/* 결과 문장과 함께 저장할 책 제목·페이지·메모 입력 영역 */
+.result-card__details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 92px;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.result-card__field--memo {
+  grid-column: 1 / -1;
+}
+
+.result-card__label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.result-card__input,
+.result-card__memo {
+  display: block;
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.result-card__memo {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.result-card__input:focus-visible,
+.result-card__memo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.result-card__save-status {
+  min-height: 18px;
+  margin-top: 10px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.result-card__footer {
+  justify-content: space-between;
+}
+
 /* 오래된 브라우저에서 복사할 때만 잠깐 사용하는 보이지 않는 입력창 */
 .temporary-copy-field {
   position: fixed;
@@ -552,6 +594,230 @@ button {
 
 .extraction-result__restart {
   margin-top: 20px;
+}
+
+/* 저장 문장을 검색하고 관리하는 보관함 화면 */
+.library-screen {
+  width: 100%;
+}
+
+.library-header__eyebrow {
+  margin-bottom: 10px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.library-header__title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.library-header__title:focus {
+  outline: none;
+}
+
+.library-header__description {
+  margin-top: 10px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.library-search {
+  margin-top: 24px;
+}
+
+.library-search__input {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 14px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+}
+
+.library-search__input:focus-visible,
+.library-card__input:focus-visible,
+.library-card__textarea:focus-visible,
+.library-card__action:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.library-count {
+  margin-top: 18px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.library-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* 보관함에 저장된 문장 한 개와 관리 버튼을 담는 카드 */
+.library-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-background);
+}
+
+.library-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.library-card__date {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+.library-card__text {
+  margin-top: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+.library-card__book,
+.library-card__memo {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.library-card__book {
+  margin-top: 14px;
+}
+
+.library-card__memo {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
+.library-card__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.library-card__action {
+  min-height: 40px;
+  padding: 9px 11px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.library-card__action--primary {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-background);
+}
+
+.library-card__action--danger {
+  color: var(--color-text-secondary);
+}
+
+.library-card__action:active {
+  transform: scale(0.98);
+}
+
+/* 보관함 카드 안에서 문장과 책 정보를 고치는 편집 영역 */
+.library-card__edit-form {
+  display: grid;
+  gap: 8px;
+}
+
+.library-card__label {
+  margin-top: 6px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.library-card__input,
+.library-card__textarea {
+  display: block;
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.library-card__textarea {
+  min-height: 126px;
+  resize: vertical;
+}
+
+.library-card__textarea--memo {
+  min-height: 82px;
+}
+
+.library-card__edit-error {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.library-card__edit-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* 저장 문장이 없거나 검색 결과가 없을 때 보여주는 안내 화면 */
+.library-empty {
+  margin-top: 12px;
+  padding: 30px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.library-empty__title {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.library-empty__description {
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.library-empty__button {
+  margin-top: 18px;
 }
 
 @keyframes spin {
@@ -762,7 +1028,6 @@ button {
     border-radius: 10px;
   }
 
-  .result-card__mark-type,
   .result-card__number {
     font-size: 10px;
   }
@@ -807,6 +1072,33 @@ button {
     margin-top: 10px;
   }
 
+  .result-card__details {
+    grid-template-columns: minmax(0, 1fr) 82px;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .result-card__label {
+    margin-bottom: 5px;
+    font-size: 10px;
+  }
+
+  .result-card__input,
+  .result-card__memo {
+    padding: 8px 9px;
+    font-size: 13px;
+  }
+
+  .result-card__memo {
+    min-height: 66px;
+  }
+
+  .result-card__save-status {
+    min-height: 15px;
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
   .empty-result {
     margin-top: 10px;
     padding: 20px 17px;
@@ -824,6 +1116,116 @@ button {
 
   .extraction-result__restart {
     margin-top: 17px;
+  }
+
+  .library-header__eyebrow {
+    margin-bottom: 8px;
+    font-size: 11px;
+  }
+
+  .library-header__title {
+    font-size: 26px;
+  }
+
+  .library-header__description {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .library-search {
+    margin-top: 20px;
+  }
+
+  .library-search__input {
+    min-height: 41px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .library-count {
+    margin-top: 15px;
+    font-size: 11px;
+  }
+
+  .library-list {
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .library-card {
+    padding: 17px;
+    border-radius: 10px;
+  }
+
+  .library-card__date {
+    font-size: 10px;
+  }
+
+  .library-card__text {
+    margin-top: 13px;
+    font-size: 15px;
+  }
+
+  .library-card__book,
+  .library-card__memo {
+    font-size: 11px;
+  }
+
+  .library-card__book {
+    margin-top: 12px;
+  }
+
+  .library-card__actions {
+    margin-top: 13px;
+    padding-top: 12px;
+  }
+
+  .library-card__action {
+    min-height: 36px;
+    padding: 8px 9px;
+    font-size: 11px;
+  }
+
+  .library-card__label {
+    font-size: 10px;
+  }
+
+  .library-card__input,
+  .library-card__textarea {
+    padding: 8px 9px;
+    font-size: 13px;
+  }
+
+  .library-card__textarea {
+    min-height: 110px;
+  }
+
+  .library-card__textarea--memo {
+    min-height: 72px;
+  }
+
+  .library-card__edit-error {
+    font-size: 10px;
+  }
+
+  .library-empty {
+    margin-top: 10px;
+    padding: 25px 17px;
+    border-radius: 10px;
+  }
+
+  .library-empty__title {
+    font-size: 14px;
+  }
+
+  .library-empty__description {
+    margin-top: 7px;
+    font-size: 11px;
+  }
+
+  .library-empty__button {
+    margin-top: 15px;
   }
 
   .button--camera,
